@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int      @id @default(autoincrement())
+  username          String   @unique
+  email             String   @unique
+  password          String?
+  created_at        DateTime @default(now())
+  application_message String
+  is_admin          Boolean  @default(false)
+  is_approved       Boolean  @default(false)
+}
+
+model Story {
+  id           Int      @id @default(autoincrement())
+  user_id      Int
+  created_at   DateTime @default(now())
+  title        String?
+  content      String?
+  is_published Boolean  @default(false)
+  is_deleted   Boolean  @default(false)
+  user         User     @relation(fields: [user_id], references: [id])
+  parent_comments ParentComment[]
+}
+
+model ParentComment {
+  id         Int      @id @default(autoincrement())
+  story_id   Int
+  user_id    Int
+  created_at DateTime @default(now())
+  content    String?
+  story      Story    @relation(fields: [story_id], references: [id])
+  user       User     @relation(fields: [user_id], references: [id])
+  child_comments ChildComment[]
+}
+
+model ChildComment {
+  id         Int      @id @default(autoincrement())
+  parent_id  Int
+  user_id    Int
+  created_at DateTime @default(now())
+  content    String?
+  parent     ParentComment @relation(fields: [parent_id], references: [id])
+  user       User     @relation(fields: [user_id], references: [id])
+}
