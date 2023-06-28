@@ -6,11 +6,11 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model User {
+model users {
   id                  Int             @id @default(autoincrement())
   username            String          @unique
   email               String          @unique
@@ -19,12 +19,12 @@ model User {
   application_message String?
   is_admin            Boolean         @default(false)
   is_approved         Boolean         @default(false)
-  Story               Story[]
-  ParentComment       ParentComment[]
-  ChildComment        ChildComment[]
+  stories               stories[]
+  parent_comments     parent_comments[]
+  child_comments        child_comments[]
 }
 
-model Story {
+model stories {
   id              Int             @id @default(autoincrement())
   user_id         Int
   created_at      DateTime        @default(now())
@@ -32,27 +32,27 @@ model Story {
   content         String?
   is_published    Boolean         @default(false)
   is_deleted      Boolean         @default(false)
-  user            User            @relation(fields: [user_id], references: [id])
-  parent_comments ParentComment[]
+  user            users            @relation(fields: [user_id], references: [id])
+  parent_comments  parent_comments[]
 }
 
-model ParentComment {
+model  parent_comments {
   id             Int            @id @default(autoincrement())
   story_id       Int
   user_id        Int
   created_at     DateTime       @default(now())
   content        String?
-  story          Story          @relation(fields: [story_id], references: [id])
-  user           User           @relation(fields: [user_id], references: [id])
-  child_comments ChildComment[]
+  stories          stories          @relation(fields: [story_id], references: [id])
+  user           users           @relation(fields: [user_id], references: [id])
+  child_comments child_comments[]
 }
 
-model ChildComment {
+model child_comments {
   id         Int           @id @default(autoincrement())
   parent_id  Int
   user_id    Int
   created_at DateTime      @default(now())
   content    String?
-  parent     ParentComment @relation(fields: [parent_id], references: [id])
-  user       User          @relation(fields: [user_id], references: [id])
+  parent     parent_comments @relation(fields: [parent_id], references: [id])
+  user       users          @relation(fields: [user_id], references: [id])
 }
