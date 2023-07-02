@@ -5,7 +5,7 @@ import axios from "axios";
 export default function Register() {
 
     const [registration, setRegistration] = useState({
-    userName: "",
+    username: "",
     email: "",
     password: "",
     application_message:""
@@ -22,12 +22,12 @@ export default function Register() {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     axios.post(
-      '/register', registration
+      '/api/register', registration
     )
       .then(res => {
         setRegistration(
           {
-            userName: "",
+            username: "",
             email: "",
             password: "",
             application_message:""
@@ -49,15 +49,15 @@ export default function Register() {
         <h3> Register </h3>
       </div>
       <div className="form-group">
-        <label className="form__label" htmlFor="userName">
+        <label className="form__label" htmlFor="username">
           User Name
         </label>
         <input
           className="form__input"
           type="text"
-          value={registration.userName}
+          value={registration.username}
           onChange={(e) => handleInputChange(e)}
-          id="userName"
+          id="username"
           placeholder="User Name"
           required
         />
@@ -99,7 +99,7 @@ export default function Register() {
           className="form__input"
           type="text"
           id="application_message"
-          value={registration.password}
+          value={registration.application_message}
           onChange={(e) => handleInputChange(e)}
           placeholder="Help us know you better"
         />
