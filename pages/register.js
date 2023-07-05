@@ -11,6 +11,8 @@ export default function Register() {
     application_message:""
   });
 
+    const[returnMessage,setReturnMessage] = useState("") 
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setRegistration((prevRegistration) => ({
@@ -33,6 +35,12 @@ export default function Register() {
             application_message:""
           }
         );
+        console.log(res)
+        if(res.data.message === "User created successfully"){
+          setReturnMessage("User has been created successfully.")
+        } else if (res.data.message === 'Duplicate email address'){
+          setReturnMessage(`Registration failed. An account already exists with this email or username. `)
+        } 
       });
   };
 
@@ -48,6 +56,7 @@ export default function Register() {
         <h2> Submit your application today!</h2>
         <h3> Register </h3>
       </div>
+      <div>{returnMessage}</div>
       <div className="form-group">
         <label className="form__label" htmlFor="username">
           User Name
