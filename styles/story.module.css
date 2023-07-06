@@ -1,21 +1,27 @@
 .story_item {
   font-family: Arial, sans-serif;
   list-style: none;
-  background-color:#a98467;
+  /* background-color:#a98467; */
   padding: 10px;
   margin-bottom: 20px;
   display: flex;
   justify-content: center; /* Horizontally center */
+  align-items: center;
   width: 75%;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  border-color: #a0a0a0;
+  border-width: 1px;
+  border-style: solid; /* Add border style */
 }
 
 .byline {
-  background-color: #dde5b6;
+  align-items: center;
+  background-color: #e7e7e7;
   padding: 10px;
   border-radius: 8px;
-  margin-bottom: 10px;
+  /* display: flex; */
+  width:20%
 }
 
 .title {
@@ -32,12 +38,16 @@
   color: #666;
   margin-bottom: 5px;
   padding: 0.1em;
+  display: inline;
+  white-space: nowrap;
+
 }
 
 .abbr {
+  align-items: center;
   /* background-color: #3d5a80; */
   padding: 2%;
   font-size: 17px;
-  color: #999;
+  color: #333;
   border-radius: 8px;
 }

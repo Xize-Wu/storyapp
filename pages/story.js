@@ -16,8 +16,8 @@ const Story = () => {
   return (
     <ul className={styles.story_item}>
       <div className={styles.byline}>
-      <div className={styles.username}>{username}</div>
       <div className={styles.title}>{title}</div>
+      <div className={styles.username}>By {username}</div>
       </div>
       <div className={styles.abbr}>{abbr}</div>
     </ul>
