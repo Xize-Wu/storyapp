@@ -10,12 +10,10 @@ export default function Home() {
   return (
     <>
     <AuthContextProvider>
-      {console.log(prop)}
     <Head>
       <title>CloudCastle</title>
     </Head>
       <Header />
-     <h1>CloudCastle</h1>
      <>Here we load the article list</>
      <></>
      </AuthContextProvider>
