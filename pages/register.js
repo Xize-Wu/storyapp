@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Header from '../components/Header/Header';
 import Head from 'next/head';
 import axios from "axios";
+import { AuthContextProvider } from "../components/Header/AuthContext.";
+
 export default function Register() {
 
     const [registration, setRegistration] = useState({

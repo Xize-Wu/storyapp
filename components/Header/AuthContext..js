@@ -14,6 +14,7 @@ export const AuthContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = () => {
+    
     setIsLoggedIn(true);
   };
 
