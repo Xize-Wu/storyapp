@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from 'react';
-
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -11,22 +10,21 @@ export const useAuth = () => {
 };
 
 export const AuthContextProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState({status:false,username:''});
 
-  const login = () => {
+  const login = (username) => {
     
-    setIsLoggedIn(true);
+    setIsLoggedIn({status:true, username:[username]});
   };
 
   const logout = () => {
-    // Perform logout logic
-    setIsLoggedIn(false);
+    setIsLoggedIn({status:false, username:""});
   };
 
   const authContextValue = {
     isLoggedIn,
     login,
-    logout,
+    logout, 
   };
 
   return (

@@ -15,7 +15,6 @@ export default function Home() {
     </Head>
       <Header />
      <>Here we load the article list</>
-     <></>
      </AuthContextProvider>
     </>
   )

@@ -48,7 +48,7 @@ export default function Register() {
 
 
   return (
-    <>
+    <AuthContextProvider>
       <Head>
         <title>Register - CloudCastle</title>
       </Head>
@@ -122,48 +122,6 @@ export default function Register() {
       </footer>
     </form>
       
-    </>
+    </AuthContextProvider>
   );
 }
-
-
-// import { useState } from "react";
-// import axios from "axios";
-
-// function Register() {
-//   const [registration, setRegistration] = useState({
-//     userName: "",
-//     email: "",
-//     password: "",
-//   });
-
-//   const handleInputChange = (e) => {
-//     const { id, value } = e.target;
-//     setRegistration((prevRegistration) => ({
-//       ...prevRegistration,
-//       [id]: value,
-//     }));
-//   };
-
-//   const handleSubmit = (evt) => {
-//     evt.preventDefault();
-//     axios.post(
-//       '/register', registration
-//     )
-//       .then(res => {
-//         setRegistration(
-//           {
-//             userName: "",
-//             email: "",
-//             password: "",
-//           }
-//         );
-//       });
-//   };
-
-//   return (
-
-//   );
-// }
-
-// export default Register;
