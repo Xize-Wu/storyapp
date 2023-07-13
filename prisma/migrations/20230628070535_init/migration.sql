@@ -1,13 +1,19 @@
+-- migration.sql
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS stories CASCADE;
+DROP TABLE IF EXISTS parent_comments CASCADE;
+DROP TABLE IF EXISTS child_comments CASCADE;
+
 -- CreateTable
 CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
-    "username" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
+    "username" TEXT NOT NULL UNIQUE,
+    "email" TEXT NOT NULL UNIQUE,
     "password" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "application_message" TEXT,
-    "is_admin" BOOLEAN NOT NULL DEFAULT false,
-    "is_approved" BOOLEAN NOT NULL DEFAULT false,
+    "admin" BOOLEAN NOT NULL DEFAULT false,
+    "approved" VARCHAR NOT NULL DEFAULT 'pending',
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -40,7 +46,8 @@ CREATE TABLE "parent_comments" (
 CREATE TABLE "child_comments" (
     "id" SERIAL NOT NULL,
     "parent_id" INTEGER NOT NULL,
-    "user_id" INTEGER NOT NULL,
+    "sender_id" INTEGER NOT NULL,
+    "receiver_id" INTEGER NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "content" TEXT,
 
@@ -66,4 +73,7 @@ ALTER TABLE "parent_comments" ADD CONSTRAINT "parent_comments_user_id_fkey" FORE
 ALTER TABLE "child_comments" ADD CONSTRAINT "child_comments_parent_id_fkey" FOREIGN KEY ("parent_id") REFERENCES "parent_comments"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "child_comments" ADD CONSTRAINT "child_comments_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "child_comments" ADD CONSTRAINT "child_comments_sender_id_fkey" FOREIGN KEY ("sender_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "child_comments" ADD CONSTRAINT "child_comments_receiver_id_fkey" FOREIGN KEY ("receiver_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
