@@ -1,12 +1,10 @@
 import { React } from 'react';
 import styles from './Header.module.css';
 import Link from 'next/link';
-import { useAuth } from './AuthContext.';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faComment } from '@fortawesome/free-solid-svg-icons';
 
 const Header = (props) => {
-  const { isLoggedIn, login, logout } = useAuth();
   console.log('header',props)
   return (
     <header className={styles.header}>
