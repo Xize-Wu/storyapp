@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import Header from '../components/Header/Header';
 import Head from 'next/head';
 import axios from "axios";
-import { AuthContextProvider, useAuth } from "../components/Header/AuthContext.";
 import LoginForm from "../components/LoginForm/LoginForm";
+import Cookies from 'js-cookie';
+
 
 export default function Login() {
+  const username = Cookies.get('username');
+
 
   return (
     <>
-      <AuthContextProvider>
       <Head>
         <title>Login - CloudCastle</title>
       </Head>
-        <Header />
+        <Header username={username}/>
         <LoginForm />
-      </AuthContextProvider>
-
     </>
 
   );

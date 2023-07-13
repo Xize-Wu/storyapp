@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useRouter } from 'next/router';
+
 import axios from "axios";
-import { AuthContextProvider, useAuth } from "../Header/AuthContext.";
 
 const LoginForm = () => {
-  const { isLoggedIn, login, logout } = useAuth();
+
+  // const router = useRouter();
+  const router = useRouter();
 
   const [login_data, setLogin_data] = useState({
     email: "",
@@ -31,10 +34,12 @@ const LoginForm = () => {
         );
         console.log(res)
         if(res.data.user === null){
-          setReturnMessage("Log in failed. Please check your email and/or password.");
+          setReturnMessage("Log in failed. Incorrect email and/or password.");
         } else {
-          setReturnMessage(`You have logged in successfully.`)
-          login()
+          setReturnMessage(`You have logged in successfully. Redirecting to the front page in 5 seconds.`)
+          setTimeout(() => {
+            router.push('/');
+          }, 5000); 
         } 
       });
   };
