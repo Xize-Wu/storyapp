@@ -7,14 +7,12 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     const {email, password} = req.body;
-      console.log(req.body)
 
     try {
       const newLogin = await prisma.users.findFirst({
         where: {email,password},
         select: {username: true}, 
       });
-      console.log(newLogin);
       
       const cookie = serialize("username", newLogin.username, {
         httpOnly: false,

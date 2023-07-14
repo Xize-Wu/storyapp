@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faComment } from '@fortawesome/free-solid-svg-icons';
 
 const Header = (props) => {
-  console.log('header',props)
   return (
     <header className={styles.header}>
       <div className={styles.left}> <h1 >CloudCastle</h1> </div>

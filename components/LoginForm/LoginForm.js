@@ -32,7 +32,6 @@ const LoginForm = () => {
             password: "",
           }
         );
-        console.log(res)
         if(res.data.user === null){
           setReturnMessage("Log in failed. Incorrect email and/or password.");
         } else {

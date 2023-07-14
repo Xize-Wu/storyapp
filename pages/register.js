@@ -37,7 +37,6 @@ export default function Register() {
             application_message:""
           }
         );
-        console.log(res)
         if(res.data.message === "User created successfully"){
           setReturnMessage("User has been created successfully.")
         } else if (res.data.message === 'Duplicate email address'){
