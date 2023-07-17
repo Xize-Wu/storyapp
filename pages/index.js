@@ -10,22 +10,22 @@ const NoSSRHeader = dynamic(() => import('../components/Header/Header'), { ssr: 
 const inter = Inter({ subsets: ['latin'] })
 
 export async function getStaticProps() {
+  let stories = [];
+
+  try {
+    // Make an HTTP request to your backend API to fetch all stories
+    const response = await axios.get('http://localhost:3000/api/story/get_all_stories');
+
+    // Assuming the response contains an array of story objects
+    stories = response.data;
+    console.log("stories", stories)
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+
   return {
     props: {
-      stories: [
-        {
-          id: 1,
-          title: "My First Story",
-          username: "A",
-          text: "This is my first story!"
-        },
-        {
-          id: 2,
-          title: "My Second Story",
-          username: "B",
-          text: "This is my second story!"
-        }
-      ]
+      stories
     }
   };
 }
@@ -42,8 +42,10 @@ export default function Home(props) {
       <title>CloudCastle</title>
     </Head>
       <NoSSRHeader username = {username}/>
-
-{stories.map(story=><StoryIntro title = {story.title} username = {story.username} text = {story.text}/>)}
+{/* <ul>
+  {stories.map(story=><li key={story.id}>{story.title}</li>)}
+</ul> */}
+{stories.map(story=><StoryIntro title = {story.title} username = {story.user_id} content = {story.content}/>)}
   </>
   )
 }

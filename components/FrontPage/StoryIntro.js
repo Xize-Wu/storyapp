@@ -1,9 +1,9 @@
 import styles from './StoryIntro.module.css'
 
 export default function StoryIntro (props) {
-  const { title, username, text } = props;
+  const { title, username, content } = props;
 
-  const abbr = text.substring(0, 300) + ' ...';
+  const abbr = content.substring(0, 300) + ' ...';
 
   return (
     <ul className={styles.story_item}>
