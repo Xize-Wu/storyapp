@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default async function getStory(req, res) {
-  if (req.method === 'POST') {
+  if (req.method === 'GET') {
   const s_id = parseInt(req.body.storyid)
   console.log(s_id)
   try {
